@@ -7,53 +7,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #ffffff; --dark: #111111; --accent: #ff4757; --gray: #f4f4f4; }
-        body { font-family: 'Roboto', sans-serif; margin: 0; background-color: var(--bg); color: var(--dark); }
+        body { font-family: 'Roboto', sans-serif; margin: 0; background-color: var(--bg); color: var(--dark); scroll-behavior: smooth; }
         
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid #eee; position: sticky; top: 0; background: white; z-index: 1000; }
-        .logo { font-family: 'Oswald', sans-serif; font-size: 24px; letter-spacing: 2px; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; border-bottom: 1px solid #eee; position: sticky; top: 0; background: white; z-index: 1000; }
+        .logo { font-family: 'Oswald', sans-serif; font-size: 24px; letter-spacing: 2px; text-decoration: none; color: var(--dark); }
+        
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; margin-left: 20px; font-size: 0.85rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
 
         .container { padding: 40px 5%; }
+        .category-title { font-family: 'Oswald', sans-serif; font-size: 1.8rem; border-left: 5px solid var(--accent); padding-left: 15px; margin: 50px 0 30px; }
+        
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-
-        .product-card { background: var(--bg); cursor: pointer; transition: 0.3s; }
+        .product-card { background: var(--bg); cursor: pointer; transition: 0.3s; border: 1px solid #f0f0f0; padding: 10px; }
         .product-card img { width: 100%; height: 380px; object-fit: cover; }
-        .product-card:hover { transform: translateY(-5px); }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
         .product-info { padding: 15px 0; text-align: center; }
         .product-title { font-weight: 700; margin: 5px 0; }
         .product-price { color: var(--accent); font-weight: bold; }
 
-        /* MODAL (Açıklama Penceresi) */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; }
-        .modal-content { background: white; margin: 5% auto; padding: 30px; width: 80%; max-width: 900px; border-radius: 10px; display: flex; gap: 30px; flex-wrap: wrap; }
-        .modal-images { flex: 1; min-width: 300px; }
-        .modal-details { flex: 1; min-width: 300px; }
-        .main-modal-img { width: 100%; height: 400px; object-fit: cover; border-radius: 5px; }
-        .thumb-container { display: flex; gap: 10px; margin-top: 10px; }
-        .thumb { width: 80px; height: 80px; object-fit: cover; cursor: pointer; border: 2px solid transparent; }
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); overflow-y: auto; }
+        .modal-content { background: white; margin: 5% auto; padding: 30px; width: 85%; max-width: 1000px; border-radius: 5px; display: flex; gap: 30px; flex-wrap: wrap; position: relative; }
+        .modal-images { flex: 1.2; min-width: 320px; }
+        .modal-details { flex: 1; min-width: 320px; }
+        .main-modal-img { width: 100%; height: 500px; object-fit: cover; }
+        .thumb-container { display: flex; gap: 10px; margin-top: 15px; overflow-x: auto; }
+        .thumb { width: 70px; height: 70px; object-fit: cover; cursor: pointer; border: 2px solid transparent; }
         .thumb:hover { border-color: var(--accent); }
-        .close { float: right; font-size: 30px; cursor: pointer; color: #333; }
-        
-        .buy-btn { background: var(--dark); color: white; padding: 15px; width: 100%; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .close { position: absolute; right: 20px; top: 15px; font-size: 35px; cursor: pointer; color: #333; }
+        .buy-btn { background: var(--dark); color: white; padding: 18px; width: 100%; border: none; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.3s; }
+        .buy-btn:hover { background: var(--accent); }
 
-        @media (max-width: 768px) { .modal-content { width: 95%; margin: 2% auto; flex-direction: column; } }
+        footer { background: var(--dark); color: white; padding: 40px; text-align: center; margin-top: 60px; }
+        @media (max-width: 768px) { .modal-content { flex-direction: column; padding: 20px; } .nav-links { display: none; } }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo">ARDA BOUTIQUE</div>
-    <div>Menü ☰</div>
+    <a href="#" class="logo">ARDA BOUTIQUE</a>
+    <div class="nav-links">
+        <a href="#ust-giyim">ÜST GİYİM</a>
+        <a href="#alt-giyim">ALT GİYİM</a>
+        <a href="#aksesuar">AKSESUAR</a>
+    </div>
 </nav>
 
 <div class="container">
-    <h2 style="text-align:center; font-family:'Oswald'; margin-bottom:40px;">TREND KOLEKSİYON</h2>
-    <div class="product-grid" id="productGrid">
-        <!-- Ürünler JS ile buraya gelecek -->
-    </div>
+    <!-- Üst Giyim -->
+    <h2 class="category-title" id="ust-giyim">ÜST GİYİM</h2>
+    <div class="product-grid" id="grid-ust"></div>
+
+    <!-- Alt Giyim -->
+    <h2 class="category-title" id="alt-giyim">ALT GİYİM</h2>
+    <div class="product-grid" id="grid-alt"></div>
 </div>
 
-<!-- Modal Yapısı -->
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
@@ -62,9 +73,9 @@
             <div id="thumbContainer" class="thumb-container"></div>
         </div>
         <div class="modal-details">
-            <h2 id="modalTitle"></h2>
-            <p id="modalDesc" style="color:#666; line-height:1.6;"></p>
-            <h3 id="modalPrice" style="color:var(--accent);"></h3>
+            <h2 id="modalTitle" style="font-family:'Oswald'; letter-spacing:1px;"></h2>
+            <p id="modalDesc" style="color:#555; line-height:1.7; margin: 20px 0;"></p>
+            <h3 id="modalPrice" style="color:var(--accent); font-size: 1.5rem;"></h3>
             <button class="buy-btn" onclick="orderWA()">WHATSAPP İLE SİPARİŞ VER</button>
         </div>
     </div>
@@ -73,37 +84,48 @@
 <script>
     const products = [
         {
-            id: 1, title: "Oversize Deri Ceket", price: "2.450 TL", 
-            desc: "Hakiki deri görünümlü, içi kürklü kışlık ceket. Üç farklı açıdan inceleyin.",
+            id: 1, cat: "ust", title: "Oversize Deri Ceket", price: "2.450 TL", 
+            desc: "Premium suni deri kumaş. Rüzgar geçirmez, kış ayları için özel kürklü astar. Modern kesim.",
             images: [
-                "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800", // Ön
-                "https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=800", // Yan
-                "https://images.unsplash.com/photo-1551028150-64b9f398f678?w=800"  // Detay
+                "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
+                "https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=800",
+                "https://images.unsplash.com/photo-1551028150-64b9f398f678?w=800"
             ]
         },
         {
-            id: 2, title: "Retro Kargo Pantolon", price: "850 TL", 
-            desc: "Bol kesim, 6 cepli dayanıklı kumaş. Sokak stili için ideal.",
+            id: 2, cat: "alt", title: "Retro Kargo Pantolon", price: "850 TL", 
+            desc: " %100 Pamuklu gabardin kumaş. Rahat kalıp, yan cepli kargo tasarım. Gri renk seçeneğiyle.",
             images: [
                 "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800",
                 "https://images.unsplash.com/photo-1624371414361-e6e0ed2b6512?w=800",
                 "https://images.unsplash.com/photo-1517441667397-09903901869e?w=800"
             ]
+        },
+        {
+            id: 3, cat: "ust", title: "Vintage Basic Hoodie", price: "720 TL", 
+            desc: "Şardonlu kalın kumaş. Minimalist tasarım, her kombine uygun basic parça.",
+            images: [
+                "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+                "https://images.unsplash.com/photo-1513273191490-671899175788?w=800",
+                "https://images.unsplash.com/photo-1554563083-07973f15617a?w=800"
+            ]
         }
     ];
 
-    const grid = document.getElementById('productGrid');
-    products.forEach(p => {
-        grid.innerHTML += `
-            <div class="product-card" onclick="openModal(${p.id})">
-                <img src="${p.images[0]}">
-                <div class="product-info">
-                    <div class="product-title">${p.title}</div>
-                    <div class="product-price">${p.price}</div>
+    function loadProducts() {
+        products.forEach(p => {
+            const grid = document.getElementById(`grid-${p.cat}`);
+            grid.innerHTML += `
+                <div class="product-card" onclick="openModal(${p.id})">
+                    <img src="${p.images[0]}">
+                    <div class="product-info">
+                        <div class="product-title">${p.title}</div>
+                        <div class="product-price">${p.price}</div>
+                    </div>
                 </div>
-            </div>
-        `;
-    });
+            `;
+        });
+    }
 
     function openModal(id) {
         const p = products.find(x => x.id === id);
@@ -117,7 +139,6 @@
         p.images.forEach(img => {
             thumbs.innerHTML += `<img src="${img}" class="thumb" onclick="document.getElementById('mainImg').src='${img}'">`;
         });
-        
         document.getElementById('productModal').style.display = "block";
     }
 
@@ -126,6 +147,12 @@
         const title = document.getElementById('modalTitle').innerText;
         window.open(`https://wa.me/905000000000?text=${encodeURIComponent(title)} ürünü hakkında bilgi almak istiyorum.`);
     }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('productModal')) closeModal();
+    }
+
+    loadProducts();
 </script>
 
 </body>
